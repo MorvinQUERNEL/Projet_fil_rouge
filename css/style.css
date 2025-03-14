@@ -142,10 +142,22 @@ body {
                 gap: 5px;
                 margin: 5px;
                 article {
-                    
+                    background-color: var(--background-end);
+                    border-radius: 5px;
+                    &:hover {
+                    }
+                    .commentaire-acticle {
+                        padding-inline: 5px;
+                        padding-bottom: 20px;
+                    }
                 }
+                
             }
         }
+    }
+    footer {
+        height: 25vh;
+        background: radial-gradient(circle, #5DE496, #5F91A7);
     }
 
 }
