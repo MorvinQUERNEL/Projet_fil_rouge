@@ -123,7 +123,10 @@ body {
 
                 figure {
                     position: relative;
-
+                    img:hover {
+                        width: 105%;
+                        z-index: 2;
+                    }
                     figcaption {
                         font-size: 3rem;
                         color: white;
