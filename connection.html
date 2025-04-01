@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet fil Rouge</title>
+    <title>Click & Sport - Connexion</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
 </head>
-
 <body>
 <header>
-    <nav>
+    <nav class="navigation">
         <div class="burger-menu">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
         <div class="img">
-            <img src="images/logo1.png" alt="logo">
+            <img src="images/logo1.png" width="50" alt="logo">
         </div>
         <div class="icons">
             <svg id="panier" width="35" height="36" viewBox="0 0 35 36" fill="none"
@@ -33,10 +30,55 @@
                         fill="#5DE496" />
             </svg>
         </div>
-        <input type="text">
+        <div class ="search-bar">
+            <input type="text">
+        </div>
+
     </nav>
 </header>
+    <main class="connexion-container">
+        <h1>SE CONNECTER</h1>
+        
+        <form class="connexion-form">
+            <div class="form-group">
+                <label>saisissez votre email:</label>
+                <input type="email" placeholder="exemple@click&sport.com">
+            </div>
+            
+            <div class="form-group">
+                <label>saisissez votre email:</label>
+                <input type="password" placeholder="********">
+                <div class="password-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Se souvenir de moi</label>
+                    </div>
+                    <a href="#" class="forgot-password">Mot de passe oublié?</a>
+                </div>
+            </div>
 
+            <button type="submit" class="btn-connexion">CONNEXION</button>
+        </form>
+
+        <div class="social-connexion">
+            <p>Ou connectez-vous avec</p>
+            <div class="social-buttons">
+                <button class="btn-google">Google</button>
+                <button class="btn-facebook">Facebook</button>
+            </div>
+        </div>
+
+        <p class="create-account">
+            Pas encore de compte? <a href="#">Créez-en un ici</a>
+        </p>
+    </main>
+<footer>
+    <h2>Suivez-nous</h2>
+    <div>
+        <img src="icons/fb-removebg.png" alt="facebook">
+        <img src="icons/insta-removebg.png" alt="insta">
+        <img src="icons/snap-removebg.png" alt="snap">
+    </div>
+</footer>
 </body>
-
 </html>

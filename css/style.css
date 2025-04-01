@@ -13,7 +13,10 @@
     --background-bouton: #fef163;
     --background-start: #5F91A7;
     --background-end: #CDDED6;
-    --linear-background: linear-gradient(to top, #5F91A7, #5DE496)
+    --linear-background: linear-gradient(to top, #5F91A7, #5DE496);
+    --primary-color: #5DE496;
+    --dark-blue: #2B4D5C;
+    --white: #ffffff;
 }
 
 * {
@@ -34,20 +37,29 @@
     }
 }
 
-
-
 body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--dark-blue);
+    color: var(--white);
     background: linear-gradient(to top,#5F91A7,#CDDED6);
     min-height: 100vh;
+
+    /* Header styles */
     header {
-        background: var(--primary);
-        justify-content: right;
+        background-color: var(--dark-blue);
+        padding: 1rem;
         align-items: center;
         padding-bottom: 5px;
 
-        nav {
+
+        .navigation {
+
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3,1fr);
+            align-items: center;
+            justify-content: space-between;
 
             .burger-menu {
                 cursor: pointer;
@@ -66,13 +78,12 @@ body {
             }
 
             .img {
+                margin: auto;
                 width: 65px;
-                grid-column: 3 / 4;
             }
 
             .icons {
                 width: 60px;
-                grid-column: 5 / 6;
                 display: flex;
                 align-items: center;
 
@@ -81,14 +92,16 @@ body {
                 }
             }
 
-            input {
-                margin-inline: 20px;
-                grid-column: 1 / -1;
-                background-color: var(--secondary);
-                border: none;
-                border-radius: 15px;
+            .search-bar {
+                grid-column: 2/3;
+                display: block;
+                input {
+                    background-color: var(--primary-color);
+                    border: none;
+                    border-radius: 25px;
+                    padding: 0.5rem 1rem;
+                }
             }
-
         }
     }
 
@@ -123,6 +136,7 @@ body {
 
                 figure {
                     position: relative;
+
                     img:hover {
                         width: 105%;
                         z-index: 2;
@@ -162,5 +176,113 @@ body {
         height: 25vh;
         background: radial-gradient(circle, #5DE496, #5F91A7);
     }
+}
 
+/* Connexion container styles */
+.connexion-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+
+    h1 {
+        text-align: center;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+    }
+
+    /* Form styles */
+    .connexion-form {
+        .form-group {
+            margin-bottom: 1.5rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--white);
+            }
+
+            input {
+                width: 100%;
+                padding: 0.8rem;
+                border: none;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: var(--white);
+            }
+
+            .password-options {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 0.5rem;
+
+                .forgot-password {
+                    color: var(--primary-color);
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .btn-connexion {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 25px;
+            color: var(--white);
+            font-weight: bold;
+            margin: 1.5rem 0;
+            cursor: pointer;
+        }
+    }
+
+    /* Social connexion styles */
+    .social-connexion {
+        text-align: center;
+        margin: 2rem 0;
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+
+            button {
+                padding: 0.8rem 2rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    /* Create account styles */
+    .create-account {
+        text-align: center;
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    }
+
+    /* Social follow styles */
+    .social-follow {
+        text-align: center;
+        margin-top: 3rem;
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+
+            a {
+                width: 40px;
+                height: 40px;
+                background-color: var(--primary-color);
+                border-radius: 50%;
+                display: inline-block;
+            }
+        }
+    }
 }
