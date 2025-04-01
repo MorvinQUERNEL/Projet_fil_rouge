@@ -96,6 +96,7 @@ body {
                 grid-column: 2/3;
                 display: block;
                 input {
+                    width: 100%;
                     background-color: var(--primary-color);
                     border: none;
                     border-radius: 25px;
