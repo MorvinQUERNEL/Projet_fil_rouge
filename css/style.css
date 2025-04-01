@@ -287,3 +287,31 @@ body {
         }
     }
 }
+/* tarik css  */
+.footer-icon{
+    display: grid; 
+grid-template-columns: repeat(5,1fr); 
+justify-items: center; 
+gap: 15px;
+margin-top: 50px;
+
+
+img{
+    width: 40px;
+}
+.facebook{
+    grid-column: 2/3;
+}
+.logo-snap{
+    background-color: white;
+    border-radius: 50%;
+}
+}
+footer{
+p{position:fixed;
+bottom: 0;
+left: 0;
+text-align: center;
+padding: 10px;
+}
+}
