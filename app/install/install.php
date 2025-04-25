@@ -4,42 +4,106 @@ require_once '../includes/dbconnect.php';
 // Fonction pour créer les tables
 function createTables($pdo) {
     $queries = [
-        "DROP DATABASE IF EXISTS blog;",
-        "CREATE DATABASE blog;",
-        "USE blog;",
-        "CREATE TABLE IF NOT EXISTS authors (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            lastname VARCHAR(100) NOT NULL,
-            firstname VARCHAR(100) NOT NULL,
-            email VARCHAR(255) NOT NULL UNIQUE
-        )",
-        "CREATE TABLE IF NOT EXISTS categories (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            description VARCHAR(255)
-        )",
-        "CREATE TABLE IF NOT EXISTS posts (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            content TEXT NOT NULL,
-            authors_id INT NOT NULL,
-            FOREIGN KEY (authors_id) REFERENCES authors(id)
-        )",
-        "CREATE TABLE IF NOT EXISTS posts_categories (
-            posts_id INT NOT NULL,
-            categories_id INT NOT NULL,
-            PRIMARY KEY(posts_id, categories_id),
-            FOREIGN KEY (posts_id) REFERENCES posts(id),
-            FOREIGN KEY (categories_id) REFERENCES categories(id)
-        )",
-        "CREATE TABLE IF NOT EXISTS comments (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            content VARCHAR(500) NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            posts_id INT NOT NULL,
-            FOREIGN KEY (posts_id) REFERENCES posts(id)
-        )"
+        "DROP DATABASE IF EXISTS clickandsport;",
+        "CREATE DATABASE clickandsport;",
+        "USE clickandsport;",
+        "CREATE TABLE users(
+           user_id INT AUTO_INCREMENT PRIMARY KEY,
+           name VARCHAR(100) NOT NULL,
+           firstname VARCHAR(100) NOT NULL,
+           email VARCHAR(255) NOT NULL,
+           phone_number VARCHAR(20) NOT NULL,
+           password VARCHAR(50) NOT NULL,
+           UNIQUE(email),
+           UNIQUE(password)
+        );
+        
+        CREATE TABLE categories(
+           categorie_id INT AUTO_INCREMENT PRIMARY KEY,
+           title_categorie VARCHAR(100) NOT NULL,
+           description TEXT NOT NULL
+        );
+        
+        CREATE TABLE address(
+           address_id INT AUTO_INCREMENT PRIMARY KEY,
+           city VARCHAR(255) NOT NULL,
+           zipcode CHAR(5) NOT NULL,
+           type VARCHAR(50),
+           address VARCHAR(255) NOT NULL,
+           user_id INT NOT NULL,
+           FOREIGN KEY(user_id) REFERENCES users(user_id)
+        );
+        
+        CREATE TABLE products(
+           product_id INT AUTO_INCREMENT PRIMARY KEY,
+           title_product VARCHAR(100) NOT NULL,
+           price DECIMAL(10,2) NOT NULL,
+           description TEXT NOT NULL,
+           stock_quantity INT NOT NULL,
+           avis INT(1) NOT NULL,
+           categorie_id INT NOT NULL,
+           FOREIGN KEY(categorie_id) REFERENCES categories(categorie_id)
+        );
+        
+        CREATE TABLE orders(
+           order_id INT AUTO_INCREMENT PRIMARY KEY,
+           statut VARCHAR(50) NOT NULL,
+           date_order DATETIME NOT NULL,
+           total_amount DECIMAL(15,2),
+           mode_paiement VARCHAR(50),
+           date_ VARCHAR(50),
+           address_id INT NOT NULL,
+           user_id INT NOT NULL,
+           FOREIGN KEY(address_id) REFERENCES address(address_id),
+           FOREIGN KEY(user_id) REFERENCES users(user_id)
+        );
+        
+        CREATE TABLE picture(
+           picture_id INT AUTO_INCREMENT PRIMARY KEY,
+           title_picture VARCHAR(100) NOT NULL,
+           product_id INT NOT NULL,
+           FOREIGN KEY(product_id) REFERENCES products(product_id)
+        );
+        
+        CREATE TABLE colors(
+           color_id INT AUTO_INCREMENT PRIMARY KEY,
+           title_colors VARCHAR(100) NOT NULL,
+           product_id INT NOT NULL,
+           FOREIGN KEY(product_id) REFERENCES products(product_id)
+        );
+        
+        CREATE TABLE size(
+           size_id INT AUTO_INCREMENT PRIMARY KEY,
+           title_size VARCHAR(50),
+           product_id INT NOT NULL,
+           FOREIGN KEY(product_id) REFERENCES products(product_id)
+        );
+        
+        CREATE TABLE stocker(
+           product_id INT,
+           order_id INT,
+           PRIMARY KEY(product_id, order_id),
+           FOREIGN KEY(product_id) REFERENCES products(product_id),
+           FOREIGN KEY(order_id) REFERENCES orders(order_id)
+        );
+        
+        CREATE TABLE Evaluer(
+           user_id INT,
+           product_id INT,
+           rating INT(1) NOT NULL,
+           date_rating DATETIME NOT NULL,
+           PRIMARY KEY(user_id, product_id),
+           FOREIGN KEY(user_id) REFERENCES users(user_id),
+           FOREIGN KEY(product_id) REFERENCES products(product_id)
+        );
+        
+        CREATE TABLE aimer(
+           user_id INT,
+           product_id INT,
+           PRIMARY KEY(user_id, product_id),
+           FOREIGN KEY(user_id) REFERENCES users(user_id),
+           FOREIGN KEY(product_id) REFERENCES products(product_id)
+);"
     ];
 
     foreach ($queries as $query) {
@@ -48,89 +112,34 @@ function createTables($pdo) {
 }
 
 // Fonction pour insérer des auteurs
-function insertAuthors($pdo) {
-    $authors = [
-        ['Dupont', 'Jean', 'jean.dupont@example.com'],
-        ['Martin', 'Marie', 'marie.martin@example.com'],
-        ['Bernard', 'Paul', 'paul.bernard@example.com'],
-        ['Durand', 'Sophie', 'sophie.durand@example.com'],
-        ['Dubois', 'Pierre', 'pierre.dubois@example.com'],
-        ['Moreau', 'Julie', 'julie.moreau@example.com'],
-        ['Fournier', 'Marc', 'marc.fournier@example.com'],
-        ['Girard', 'Caroline', 'caroline.girard@example.com'],
-        ['Lefevre', 'Nicolas', 'nicolas.lefevre@example.com'],
-        ['Rousseau', 'Isabelle', 'isabelle.rousseau@example.com']
+function insertUsers($pdo) {
+    $users = [
+        ['morvin', 'LeBG', 'morvin@lebg.fr','06.01.02.03.04', 'azerty']
     ];
 
-    $stmt = $pdo->prepare("INSERT INTO authors (lastname, firstname, email) VALUES (?, ?, ?)");
-    foreach ($authors as $author) {
-        $stmt->execute($author);
+    $stmt = $pdo->prepare("INSERT INTO users (name, firstname, email, phone_number, password) VALUES (?, ?, ?, ?, ?)");
+    foreach ($users as $user) {
+        $stmt->execute($user);
     }
 }
 
 // Fonction pour insérer des catégories
 function insertCategories($pdo) {
     $categories = [
-        ['Technologie', 'Articles sur les nouvelles technologies'],
-        ['Santé', 'Conseils et actualités sur la santé'],
-        ['Sport', 'Actualités et analyses sportives'],
-        ['Voyage', 'Guides et conseils de voyage'],
-        ['Cuisine', 'Recettes et astuces culinaires'],
-        ['Éducation', 'Ressources et conseils éducatifs'],
-        ['Finance', 'Conseils et actualités financières'],
-        ['Mode', 'Tendances et conseils de mode'],
-        ['Culture', 'Articles sur la culture et les arts'],
-        ['Science', 'Découvertes et actualités scientifiques'],
-        ['Environnement', 'Articles sur l\'écologie et l\'environnement'],
-        ['Politique', 'Analyses et actualités politiques'],
-        ['Divertissement', 'Actualités sur le cinéma, la musique et les jeux'],
-        ['Automobile', 'Conseils et actualités sur les voitures'],
-        ['Immobilier', 'Conseils et actualités sur l\'immobilier'],
-        ['Famille', 'Conseils et actualités pour la famille'],
-        ['Animaux', 'Conseils et actualités sur les animaux'],
-        ['Business', 'Conseils et actualités pour les entreprises'],
-        ['High-Tech', 'Actualités sur les gadgets et les innovations technologiques'],
-        ['Bien-être', 'Conseils pour le bien-être et la relaxation'],
-        ['Littérature', 'Critiques et analyses de livres'],
-        ['Histoire', 'Articles sur l\'histoire et les événements passés'],
-        ['Beauté', 'Conseils et tendances en matière de beauté'],
-        ['Économie', 'Analyses et actualités économiques'],
-        ['Loisirs', 'Idées et conseils pour les loisirs et les activités'],
-        ['Nature', 'Articles sur la nature et les paysages'],
-        ['Société', 'Analyses et actualités sur la société'],
-        ['Art', 'Articles sur l\'art et les artistes'],
-        ['Musique', 'Actualités et critiques musicales'],
-        ['Cinéma', 'Critiques et actualités sur les films'],
-        ['Jeux vidéo', 'Actualités et critiques sur les jeux vidéo'],
-        ['Photographie', 'Conseils et actualités sur la photographie'],
-        ['Bricolage', 'Idées et conseils pour le bricolage'],
-        ['Jardinage', 'Conseils et actualités sur le jardinage'],
-        ['Décoration', 'Idées et conseils pour la décoration intérieure'],
-        ['Fitness', 'Conseils et programmes de fitness'],
-        ['Yoga', 'Conseils et pratiques de yoga'],
-        ['Voyages', 'Récits et conseils de voyage'],
-        ['Aventure', 'Articles sur les aventures et les expéditions'],
-        ['Gastronomie', 'Articles sur la gastronomie et les restaurants'],
-        ['Vin', 'Conseils et actualités sur le vin'],
-        ['Théâtre', 'Articles sur le théâtre et les spectacles'],
-        ['Danse', 'Articles sur la danse et les spectacles de danse'],
-        ['Architecture', 'Articles sur l\'architecture et les bâtiments'],
-        ['Design', 'Articles sur le design et les tendances'],
-        ['Informatique', 'Conseils et actualités sur l\'informatique'],
-        ['Électronique', 'Articles sur les composants électroniques'],
-        ['Robotique', 'Articles sur la robotique et les innovations'],
-        ['Astronomie', 'Articles sur l\'astronomie et les découvertes spatiales'],
-        ['Archéologie', 'Articles sur les fouilles et les découvertes archéologiques']
+        ['Football', 'Articles de football'],
+        ['Basketball', 'Articles de basketball'],
+        ['golf', 'Articles de golf'],
+        ['tennis', 'Articles de tennis']
     ];
 
-    $stmt = $pdo->prepare("INSERT INTO categories (name, description) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO categories (title_categorie, description) VALUES (?, ?)");
     foreach ($categories as $category) {
         $stmt->execute($category);
     }
 }
 
 // Fonction pour insérer des posts
-function insertPosts($pdo) {
+/**function insertPosts($pdo) {
     $posts = [
         [4, 'Les meilleures destinations de voyage en Europe', '<h1>Les meilleures destinations de voyage en Europe</h1><p>L\'Europe regorge de destinations incroyables à découvrir. Que vous soyez amateur de culture, de nature ou de gastronomie, il y en a pour tous les goûts. Dans cet article, nous vous présentons les meilleures destinations de voyage en Europe.</p><p>Paris, la ville de l\'amour, est incontournable pour ses monuments emblématiques comme la Tour Eiffel et le Louvre. Barcelone, avec son architecture unique et ses plages magnifiques, est une autre destination populaire. Pour les amoureux de la nature, les fjords de Norvège et les paysages à couper le souffle des Alpes suisses sont à ne pas manquer.</p>'],
         [5, 'Recette de la tarte aux pommes', '<h1>Recette de la tarte aux pommes</h1><p>La tarte aux pommes est un dessert classique et délicieux. Voici une recette simple pour réaliser une tarte aux pommes maison.</p><p>Ingrédients : 1 pâte brisée, 4 pommes, 50g de sucre, 1 cuillère à soupe de cannelle, 1 citron. Préparation : Préchauffez votre four à 180°C. Étalez la pâte brisée dans un moule à tarte. Épluchez et coupez les pommes en fines tranches. Disposez-les sur la pâte. Saupoudrez de sucre et de cannelle. Arrosez de jus de citron. Enfournez pendant 30 minutes. Laissez refroidir avant de déguster.</p>'],
@@ -374,14 +383,14 @@ function insertComments($pdo) {
     foreach ($comments as $comment) {
         $stmt->execute([$comment[1], $comment[0]]);
     }
-}
+}**/
 
 // Initialisation de la base de données
 createTables($pdo);
-insertAuthors($pdo);
+insertUsers($pdo);
 insertCategories($pdo);
-insertPosts($pdo);
+/**insertPosts($pdo);
 insertPostsCategories($pdo);
-insertComments($pdo);
+insertComments($pdo);**/
 
 echo "Base de données initialisée avec succès !";

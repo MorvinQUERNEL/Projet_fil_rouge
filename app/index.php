@@ -81,7 +81,6 @@
                         <p>⭐️⭐️⭐️⭐️⭐️</p>
                         <p class="prix">9,99</p>
                     </div>
-
                 </article>
                 <article>
                     <div>
