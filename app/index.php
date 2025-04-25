@@ -116,9 +116,9 @@
     <footer>
         <h2>Suivez-nous</h2>
         <div>
-            <img src="icons/fb-removebg.png" alt="facebook">
-            <img src="icons/insta-removebg.png" alt="insta">
-            <img src="icons/snap-removebg.png" alt="snap">
+            <img src="images/fb.png" alt="facebook">
+            <img src="images/insta.png" alt="insta">
+            <img src="images/snap.png" alt="snap">
         </div>
     </footer>
 </body>
