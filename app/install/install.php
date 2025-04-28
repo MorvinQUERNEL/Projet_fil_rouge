@@ -403,7 +403,7 @@ function insertFavorites($pdo) {
 }
 
 // Main function to populate the database
-function populateDatabase($pdo) {
+/** function populateDatabase($pdo) {
     try {
         // Create tables
         createTables($pdo);
@@ -451,21 +451,27 @@ function populateDatabase($pdo) {
 
 // Connect to the database and populate it
 try {
-    $pdo = new PDO("mysql:host=localhost", "root", "");
+    $pdo = new PDO("mysql:host=localhost", "root", "secret");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     populateDatabase($pdo);
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
-}
+} **/
 
 
 // Initialisation de la base de données
 createTables($pdo);
 insertUsers($pdo);
 insertCategories($pdo);
-/**insertPosts($pdo);
-insertPostsCategories($pdo);
-insertComments($pdo);**/
+insertAddresses($pdo);
+insertProducts($pdo);
+insertPictures($pdo);
+insertColors($pdo);
+insertSizes($pdo);
+insertOrders($pdo);
+insertStockerItems($pdo);
+insertRatings($pdo);
+insertFavorites($pdo);
 
 echo "Base de données initialisée avec succès !";
