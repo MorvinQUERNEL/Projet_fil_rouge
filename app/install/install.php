@@ -124,7 +124,7 @@ function createTables($pdo) {
     }
 }
 
-// Fonction pour insérer des auteurs
+// Fonction pour insérer des utilisateurs
 function insertUsers($pdo) {
     $users = [
         ['morvin', 'LeBG', 'morvin@lebg.fr','06.01.02.03.04', 'azerty']
@@ -141,8 +141,8 @@ function insertCategories($pdo) {
     $categories = [
         ['Football', 'Articles de football'],
         ['Basketball', 'Articles de basketball'],
-        ['golf', 'Articles de golf'],
-        ['tennis', 'Articles de tennis']
+        ['Golf', 'Articles de golf'],
+        ['Tennis', 'Articles de tennis']
     ];
 
     $stmt = $pdo->prepare("INSERT INTO categories (title_categorie, description) VALUES (?, ?)");
@@ -151,8 +151,7 @@ function insertCategories($pdo) {
     }
 }
 
-
-// Function to insert addresses
+// Fonction pour insérer des adresses
 function insertAddresses($pdo) {
     $addresses = [
         ['Paris', '75001', 'Facturation', '15 Rue de la Paix', 1],
@@ -167,45 +166,45 @@ function insertAddresses($pdo) {
     }
 }
 
-// Function to insert products
+// Fonction pour insérer des produits
 function insertProducts($pdo) {
     $products = [
         // Football products (category_id = 1)
-        ['Ballon de football professionnel', 39.99, 'Ballon de football officiel, taille 5, parfait pour les matchs et les entraînements.', 50, 4, 1],
-        ['Maillot équipe de France', 89.99, 'Maillot officiel de l\'équipe de France, collection 2024.', 100, 5, 1],
-        ['Chaussures de football à crampons', 119.99, 'Chaussures de football haute performance avec crampons pour terrain sec.', 30, 4, 1],
-        ['Gants de gardien de but', 29.99, 'Gants professionnels avec protection optimale pour les gardiens de but.', 25, 3, 1],
-        ['Protège-tibias', 19.99, 'Protège-tibias légers et résistants pour une protection optimale.', 60, 4, 1],
+        ['Ballon de football professionnel', 39.99, 'Ballon de football officiel, taille 5, parfait pour les matchs et les entraînements.', 1],
+        ['Maillot équipe de France', 89.99, 'Maillot officiel de l\'équipe de France, collection 2024.', 1],
+        ['Chaussures de football à crampons', 119.99, 'Chaussures de football haute performance avec crampons pour terrain sec.', 1],
+        ['Gants de gardien de but', 29.99, 'Gants professionnels avec protection optimale pour les gardiens de but.', 1],
+        ['Protège-tibias', 19.99, 'Protège-tibias légers et résistants pour une protection optimale.', 1],
 
         // Basketball products (category_id = 2)
-        ['Ballon de basketball NBA', 49.99, 'Ballon officiel NBA, taille 7, parfait pour la compétition.', 40, 5, 2],
-        ['Maillot Los Angeles Lakers', 79.99, 'Maillot officiel des Lakers, saison 2024.', 50, 5, 2],
-        ['Chaussures de basketball', 129.99, 'Chaussures haute performance avec amorti pour les joueurs de basketball.', 35, 4, 2],
-        ['Panier de basketball portable', 199.99, 'Panier de basketball réglable en hauteur, idéal pour le jardin.', 15, 4, 2],
-        ['Shorts de basketball', 39.99, 'Shorts respirants et confortables pour la pratique du basketball.', 70, 4, 2],
+        ['Ballon de basketball NBA', 49.99, 'Ballon officiel NBA, taille 7, parfait pour la compétition.', 2],
+        ['Maillot Los Angeles Lakers', 79.99, 'Maillot officiel des Lakers, saison 2024.', 2],
+        ['Chaussures de basketball', 129.99, 'Chaussures haute performance avec amorti pour les joueurs de basketball.', 2],
+        ['Panier de basketball portable', 199.99, 'Panier de basketball réglable en hauteur, idéal pour le jardin.', 2],
+        ['Shorts de basketball', 39.99, 'Shorts respirants et confortables pour la pratique du basketball.', 2],
 
         // Golf products (category_id = 3)
-        ['Set de clubs de golf débutant', 299.99, 'Ensemble complet de clubs pour débutants, incluant un sac.', 20, 4, 3],
-        ['Balles de golf premium', 24.99, 'Pack de 12 balles de golf haute performance.', 100, 5, 3],
-        ['Gant de golf homme', 19.99, 'Gant de golf en cuir véritable pour une meilleure prise.', 50, 4, 3],
-        ['Chaussures de golf imperméables', 149.99, 'Chaussures de golf imperméables avec crampons soft.', 30, 5, 3],
-        ['Casquette de golf', 29.99, 'Casquette légère et respirante pour le golf.', 60, 4, 3],
+        ['Set de clubs de golf débutant', 299.99, 'Ensemble complet de clubs pour débutants, incluant un sac.', 3],
+        ['Balles de golf premium', 24.99, 'Pack de 12 balles de golf haute performance.', 3],
+        ['Gant de golf homme', 19.99, 'Gant de golf en cuir véritable pour une meilleure prise.', 3],
+        ['Chaussures de golf imperméables', 149.99, 'Chaussures de golf imperméables avec crampons soft.', 3],
+        ['Casquette de golf', 29.99, 'Casquette légère et respirante pour le golf.', 3],
 
         // Tennis products (category_id = 4)
-        ['Raquette de tennis professionnelle', 179.99, 'Raquette de tennis en graphite pour joueur confirmé.', 25, 5, 4],
-        ['Balles de tennis', 14.99, 'Tube de 3 balles de tennis pour tous types de surface.', 120, 4, 4],
-        ['Chaussures de tennis tout terrain', 109.99, 'Chaussures conçues pour tous types de courts de tennis.', 40, 4, 4],
-        ['Poignet éponge', 7.99, 'Pack de 2 poignets éponge pour absorber la transpiration.', 100, 3, 4],
-        ['Sac de tennis 6 raquettes', 69.99, 'Sac spacieux pouvant contenir jusqu\'à 6 raquettes et accessoires.', 30, 4, 4]
+        ['Raquette de tennis professionnelle', 179.99, 'Raquette de tennis en graphite pour joueur confirmé.', 4],
+        ['Balles de tennis', 14.99, 'Tube de 3 balles de tennis pour tous types de surface.', 4],
+        ['Chaussures de tennis tout terrain', 109.99, 'Chaussures conçues pour tous types de courts de tennis.', 4],
+        ['Poignet éponge', 7.99, 'Pack de 2 poignets éponge pour absorber la transpiration.', 4],
+        ['Sac de tennis 6 raquettes', 69.99, 'Sac spacieux pouvant contenir jusqu\'à 6 raquettes et accessoires.', 4]
     ];
 
-    $stmt = $pdo->prepare("INSERT INTO products (title_product, price, description, stock_quantity, avis, categorie_id) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO products (title_product, price, description, categorie_id) VALUES (?, ?, ?, ?)");
     foreach ($products as $product) {
         $stmt->execute($product);
     }
 }
 
-// Function to insert pictures
+// Fonction pour insérer des images
 function insertPictures($pdo) {
     $pictures = [
         // Pictures for football products
@@ -246,117 +245,97 @@ function insertPictures($pdo) {
     }
 }
 
-// Function to insert colors
+// Fonction pour insérer des couleurs
 function insertColors($pdo) {
     $colors = [
-        ['Blanc', 1],
-        ['Noir', 1],
-        ['Bleu', 2],
-        ['Blanc', 2],
-        ['Rouge', 2],
-        ['Noir', 3],
-        ['Bleu', 3],
-        ['Rouge', 3],
-        ['Noir', 4],
-        ['Blanc', 4],
-        ['Noir', 5],
-        ['Orange', 6],
-        ['Jaune', 7],
-        ['Violet', 7],
-        ['Blanc', 8],
-        ['Noir', 8],
-        ['Rouge', 8],
-        ['Noir', 9],
-        ['Blanc', 10],
-        ['Noir', 10],
-        ['Argent', 11],
-        ['Blanc', 12],
-        ['Blanc', 13],
-        ['Noir', 13],
-        ['Noir', 14],
-        ['Blanc', 14],
-        ['Bleu marine', 15],
-        ['Blanc', 15],
-        ['Noir', 16],
-        ['Bleu', 16],
-        ['Jaune', 17],
-        ['Blanc', 18],
-        ['Bleu', 18],
-        ['Blanc', 19],
-        ['Noir', 19],
-        ['Bleu', 20],
-        ['Noir', 20]
+        ['Blanc'],
+        ['Noir'],
+        ['Bleu'],
+        ['Rouge'],
+        ['Orange'],
+        ['Jaune'],
+        ['Violet'],
+        ['Argent'],
+        ['Bleu marine']
     ];
 
-    $stmt = $pdo->prepare("INSERT INTO colors (title_colors, product_id) VALUES (?, ?)");
-    foreach ($colors as $color) {
-        $stmt->execute($color);
+    $stmt = $pdo->prepare("INSERT INTO colors (color_id, title_colors) VALUES (?, ?)");
+    foreach ($colors as $index => $color) {
+        $stmt->execute([strtolower($color[0]), $color[0]]);
     }
 }
 
-// Function to insert sizes
+// Fonction pour insérer des tailles
 function insertSizes($pdo) {
     $sizes = [
-        // Sizes for clothes
-        ['S', 2],
-        ['M', 2],
-        ['L', 2],
-        ['XL', 2],
-        ['S', 7],
-        ['M', 7],
-        ['L', 7],
-        ['XL', 7],
-        ['S', 10],
-        ['M', 10],
-        ['L', 10],
-        ['XL', 10],
-
-        // Sizes for shoes
-        ['38', 3],
-        ['39', 3],
-        ['40', 3],
-        ['41', 3],
-        ['42', 3],
-        ['43', 3],
-        ['44', 3],
-        ['38', 8],
-        ['39', 8],
-        ['40', 8],
-        ['41', 8],
-        ['42', 8],
-        ['43', 8],
-        ['44', 8],
-        ['38', 14],
-        ['39', 14],
-        ['40', 14],
-        ['41', 14],
-        ['42', 14],
-        ['43', 14],
-        ['44', 14],
-        ['38', 18],
-        ['39', 18],
-        ['40', 18],
-        ['41', 18],
-        ['42', 18],
-        ['43', 18],
-        ['44', 18],
-
-        // Sizes for gloves
-        ['S', 4],
-        ['M', 4],
-        ['L', 4],
-        ['S', 13],
-        ['M', 13],
-        ['L', 13]
+        ['S'],
+        ['M'],
+        ['L'],
+        ['XL'],
+        ['38'],
+        ['39'],
+        ['40'],
+        ['41'],
+        ['42'],
+        ['43'],
+        ['44']
     ];
 
-    $stmt = $pdo->prepare("INSERT INTO size (title_size, product_id) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO size (title_size) VALUES (?)");
     foreach ($sizes as $size) {
         $stmt->execute($size);
     }
 }
 
-// Function to insert sample orders
+// Fonction pour insérer des déclinaisons de produits
+function insertDecliner($pdo) {
+    $decliner = [
+        [1, 'blanc', 1, 10],
+        [1, 'noir', 1, 10],
+        [2, 'bleu', 1, 10],
+        [2, 'blanc', 1, 10],
+        [2, 'rouge', 1, 10],
+        [3, 'noir', 1, 10],
+        [3, 'bleu', 1, 10],
+        [3, 'rouge', 1, 10],
+        [4, 'noir', 1, 10],
+        [4, 'blanc', 1, 10],
+        [5, 'noir', 1, 10],
+        [6, 'orange', 1, 10],
+        [7, 'jaune', 1, 10],
+        [7, 'violet', 1, 10],
+        [8, 'blanc', 1, 10],
+        [8, 'noir', 1, 10],
+        [8, 'rouge', 1, 10],
+        [9, 'noir', 1, 10],
+        [10, 'blanc', 1, 10],
+        [10, 'noir', 1, 10],
+        [11, 'argent', 1, 10],
+        [12, 'blanc', 1, 10],
+        [13, 'blanc', 1, 10],
+        [13, 'noir', 1, 10],
+        [14, 'noir', 1, 10],
+        [14, 'blanc', 1, 10],
+        [15, 'bleu marine', 1, 10],
+        [15, 'blanc', 1, 10],
+        [16, 'noir', 1, 10],
+        [16, 'bleu', 1, 10],
+        [17, 'jaune', 1, 10],
+        [18, 'blanc', 1, 10],
+        [18, 'bleu', 1, 10],
+        [19, 'blanc', 1, 10],
+        [19, 'noir', 1, 10],
+        [20, 'bleu', 1, 10],
+        [20, 'noir', 1, 10]
+    ];
+
+    $stmt = $pdo->prepare("INSERT INTO decliner (product_id, color_id, size_id, stock_quantity) VALUES (?, ?, ?, ?)");
+    foreach ($decliner as $item) {
+        $stmt->execute($item);
+    }
+}
+
+// Fonction pour insérer des commandes
 function insertOrders($pdo) {
     $orders = [
         ['En préparation', '2024-04-20 10:30:00', 129.98, 'Carte bancaire', '2024-04-25', 1, 1],
@@ -370,7 +349,7 @@ function insertOrders($pdo) {
     }
 }
 
-// Function to insert order items (stocker table)
+// Fonction pour insérer des articles de commande (table stocker)
 function insertStockerItems($pdo) {
     $items = [
         [1, 1], // Ballon de football dans la commande 1
@@ -387,7 +366,7 @@ function insertStockerItems($pdo) {
     }
 }
 
-// Function to insert product ratings (Evaluer table)
+// Fonction pour insérer des évaluations de produits (table Evaluer)
 function insertRatings($pdo) {
     $ratings = [
         [1, 1, 4, '2024-04-10 17:30:00'], // User 1 rates product 1 with 4 stars
@@ -401,7 +380,7 @@ function insertRatings($pdo) {
     }
 }
 
-// Function to insert favorite products (aimer table)
+// Fonction pour insérer des produits favoris (table aimer)
 function insertFavorites($pdo) {
     $favorites = [
         [1, 2], // User 1 likes product 2 (Maillot équipe de France)
@@ -415,76 +394,24 @@ function insertFavorites($pdo) {
     }
 }
 
-// Main function to populate the database
-/** function populateDatabase($pdo) {
-    try {
-        // Create tables
-        createTables($pdo);
-        echo "Tables created successfully<br>";
-
-        // Insert data
-        insertUsers($pdo);
-        echo "Users inserted successfully<br>";
-
-        insertCategories($pdo);
-        echo "Categories inserted successfully<br>";
-
-        insertAddresses($pdo);
-        echo "Addresses inserted successfully<br>";
-
-        insertProducts($pdo);
-        echo "Products inserted successfully<br>";
-
-        insertPictures($pdo);
-        echo "Pictures inserted successfully<br>";
-
-        insertColors($pdo);
-        echo "Colors inserted successfully<br>";
-
-        insertSizes($pdo);
-        echo "Sizes inserted successfully<br>";
-
-        insertOrders($pdo);
-        echo "Orders inserted successfully<br>";
-
-        insertStockerItems($pdo);
-        echo "Order items inserted successfully<br>";
-
-        insertRatings($pdo);
-        echo "Ratings inserted successfully<br>";
-
-        insertFavorites($pdo);
-        echo "Favorites inserted successfully<br>";
-
-        echo "Database populated successfully!";
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-}
-
-// Connect to the database and populate it
-try {
-    $pdo = new PDO("mysql:host=localhost", "root", "secret");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    populateDatabase($pdo);
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-} **/
-
-
 // Initialisation de la base de données
-createTables($pdo);
-insertUsers($pdo);
-insertCategories($pdo);
-insertAddresses($pdo);
-insertProducts($pdo);
-insertPictures($pdo);
-insertColors($pdo);
-insertSizes($pdo);
-insertOrders($pdo);
-insertStockerItems($pdo);
-insertRatings($pdo);
-insertFavorites($pdo);
+try {
+    createTables($pdo);
+    insertUsers($pdo);
+    insertCategories($pdo);
+    insertAddresses($pdo);
+    insertProducts($pdo);
+    insertPictures($pdo);
+    insertColors($pdo);
+    insertSizes($pdo);
+    insertDecliner($pdo);
+    insertOrders($pdo);
+    insertStockerItems($pdo);
+    insertRatings($pdo);
+    insertFavorites($pdo);
 
-echo "Base de données initialisée avec succès !";
+    echo "Base de données initialisée avec succès !";
+} catch (PDOException $e) {
+    echo "Erreur lors de l'initialisation de la base de données : " . $e->getMessage();
+}
+?>
