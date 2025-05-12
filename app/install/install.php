@@ -7,103 +7,116 @@ function createTables($pdo) {
         "DROP DATABASE IF EXISTS clickandsport;",
         "CREATE DATABASE clickandsport;",
         "USE clickandsport;",
-        "CREATE TABLE users(
-           user_id INT AUTO_INCREMENT PRIMARY KEY,
-           name VARCHAR(100) NOT NULL,
-           firstname VARCHAR(100) NOT NULL,
-           email VARCHAR(255) NOT NULL,
-           phone_number VARCHAR(20) NOT NULL,
-           password VARCHAR(50) NOT NULL,
-           UNIQUE(email),
-           UNIQUE(password)
-        );
-        
-        CREATE TABLE categories(
-           categorie_id INT AUTO_INCREMENT PRIMARY KEY,
-           title_categorie VARCHAR(100) NOT NULL,
-           description TEXT NOT NULL
-        );
-        
-        CREATE TABLE address(
-           address_id INT AUTO_INCREMENT PRIMARY KEY,
-           city VARCHAR(255) NOT NULL,
-           zipcode CHAR(5) NOT NULL,
-           type VARCHAR(50),
-           address VARCHAR(255) NOT NULL,
-           user_id INT NOT NULL,
-           FOREIGN KEY(user_id) REFERENCES users(user_id)
-        );
-        
-        CREATE TABLE products(
-           product_id INT AUTO_INCREMENT PRIMARY KEY,
-           title_product VARCHAR(100) NOT NULL,
-           price DECIMAL(10,2) NOT NULL,
-           description TEXT NOT NULL,
-           stock_quantity INT NOT NULL,
-           avis INT(1) NOT NULL,
-           categorie_id INT NOT NULL,
-           FOREIGN KEY(categorie_id) REFERENCES categories(categorie_id)
-        );
-        
-        CREATE TABLE orders(
-           order_id INT AUTO_INCREMENT PRIMARY KEY,
-           statut VARCHAR(50) NOT NULL,
-           date_order DATETIME NOT NULL,
-           total_amount DECIMAL(15,2),
-           mode_paiement VARCHAR(50),
-           date_ VARCHAR(50),
-           address_id INT NOT NULL,
-           user_id INT NOT NULL,
-           FOREIGN KEY(address_id) REFERENCES address(address_id),
-           FOREIGN KEY(user_id) REFERENCES users(user_id)
-        );
-        
-        CREATE TABLE picture(
-           picture_id INT AUTO_INCREMENT PRIMARY KEY,
-           title_picture VARCHAR(100) NOT NULL,
-           product_id INT NOT NULL,
-           FOREIGN KEY(product_id) REFERENCES products(product_id)
-        );
-        
-        CREATE TABLE colors(
-           color_id INT AUTO_INCREMENT PRIMARY KEY,
-           title_colors VARCHAR(100) NOT NULL,
-           product_id INT NOT NULL,
-           FOREIGN KEY(product_id) REFERENCES products(product_id)
-        );
-        
-        CREATE TABLE size(
-           size_id INT AUTO_INCREMENT PRIMARY KEY,
-           title_size VARCHAR(50),
-           product_id INT NOT NULL,
-           FOREIGN KEY(product_id) REFERENCES products(product_id)
-        );
-        
-        CREATE TABLE stocker(
-           product_id INT,
-           order_id INT,
-           PRIMARY KEY(product_id, order_id),
-           FOREIGN KEY(product_id) REFERENCES products(product_id),
-           FOREIGN KEY(order_id) REFERENCES orders(order_id)
-        );
-        
-        CREATE TABLE Evaluer(
-           user_id INT,
-           product_id INT,
-           rating INT(1) NOT NULL,
-           date_rating DATETIME NOT NULL,
-           PRIMARY KEY(user_id, product_id),
-           FOREIGN KEY(user_id) REFERENCES users(user_id),
-           FOREIGN KEY(product_id) REFERENCES products(product_id)
-        );
-        
-        CREATE TABLE aimer(
-           user_id INT,
-           product_id INT,
-           PRIMARY KEY(user_id, product_id),
-           FOREIGN KEY(user_id) REFERENCES users(user_id),
-           FOREIGN KEY(product_id) REFERENCES products(product_id)
-);"
+        "CREATE TABLE users (
+            user_id INT AUTO_INCREMENT,
+            name VARCHAR(100) NOT NULL,
+            firstname VARCHAR(100) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            phone_number VARCHAR(20) NOT NULL,
+            password VARCHAR(50) NOT NULL,
+            PRIMARY KEY(user_id),
+            UNIQUE(email),
+            UNIQUE(password)
+        )",
+
+        "CREATE TABLE categories (
+            categorie_id INT AUTO_INCREMENT,
+            title_categorie VARCHAR(100) NOT NULL,
+            description TEXT NOT NULL,
+            PRIMARY KEY(categorie_id)
+        )",
+
+        "CREATE TABLE address (
+            address_id INT AUTO_INCREMENT,
+            city VARCHAR(255) NOT NULL,
+            zipcode CHAR(5) NOT NULL,
+            type VARCHAR(50),
+            address VARCHAR(255) NOT NULL,
+            user_id INT NOT NULL,
+            PRIMARY KEY(address_id),
+            FOREIGN KEY(user_id) REFERENCES users(user_id)
+        )",
+
+        "CREATE TABLE colors (
+            color_id VARCHAR(50),
+            title_colors VARCHAR(100) NOT NULL,
+            PRIMARY KEY(color_id)
+        )",
+
+        "CREATE TABLE size (
+            size_id INT AUTO_INCREMENT,
+            title_size VARCHAR(50),
+            PRIMARY KEY(size_id)
+        )",
+
+        "CREATE TABLE products (
+            product_id INT AUTO_INCREMENT,
+            title_product VARCHAR(100) NOT NULL,
+            price DECIMAL(10,2) NOT NULL,
+            description TEXT NOT NULL,
+            categorie_id INT NOT NULL,
+            PRIMARY KEY(product_id),
+            FOREIGN KEY(categorie_id) REFERENCES categories(categorie_id)
+        )",
+
+        "CREATE TABLE orders (
+            order_id INT AUTO_INCREMENT,
+            statut VARCHAR(50) NOT NULL,
+            date_order DATETIME NOT NULL,
+            total_amount DECIMAL(15,2),
+            mode_paiement VARCHAR(50),
+            date_ VARCHAR(50),
+            address_id INT NOT NULL,
+            user_id INT NOT NULL,
+            PRIMARY KEY(order_id),
+            FOREIGN KEY(address_id) REFERENCES address(address_id),
+            FOREIGN KEY(user_id) REFERENCES users(user_id)
+        )",
+
+        "CREATE TABLE picture (
+            picture_id INT AUTO_INCREMENT,
+            title_picture VARCHAR(100) NOT NULL,
+            product_id INT NOT NULL,
+            PRIMARY KEY(picture_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id)
+        )",
+
+        "CREATE TABLE stocker (
+            product_id INT,
+            order_id INT,
+            PRIMARY KEY(product_id, order_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id),
+            FOREIGN KEY(order_id) REFERENCES orders(order_id)
+        )",
+
+        "CREATE TABLE Evaluer (
+            user_id INT,
+            product_id INT,
+            rating TINYINT NOT NULL,
+            date_rating DATETIME NOT NULL,
+            PRIMARY KEY(user_id, product_id),
+            FOREIGN KEY(user_id) REFERENCES users(user_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id)
+        )",
+
+        "CREATE TABLE aimer (
+            user_id INT,
+            product_id INT,
+            PRIMARY KEY(user_id, product_id),
+            FOREIGN KEY(user_id) REFERENCES users(user_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id)
+        )",
+
+        "CREATE TABLE decliner (
+            product_id INT,
+            color_id VARCHAR(50),
+            size_id INT,
+            stock_quantity TINYINT NOT NULL,
+            PRIMARY KEY(product_id, color_id, size_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id),
+            FOREIGN KEY(color_id) REFERENCES colors(color_id),
+            FOREIGN KEY(size_id) REFERENCES size(size_id)
+        );"
     ];
 
     foreach ($queries as $query) {
