@@ -2,7 +2,7 @@
 // Définition des informations de connexion
 const DBHOST = 'mysql'; // Serveur de base de données
 const DBNAME = 'clickandsport'; // Nom de la base de données
-const DBUSER = 'root'; // Utilisateur de la base de données
+const DBUSER = 'clickandsport'; // Utilisateur de la base de données
 const DBPASS = 'secret'; // Mot de passe de l'utilisateur
 
 // Ne JAMAIS changer ce qui est ci-dessous
